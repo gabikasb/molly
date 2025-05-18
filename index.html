@@ -33,6 +33,11 @@
       font-size: 2rem;
       color: #e96b56;
     }
+    .instructions {
+      font-size: 1rem;
+      margin-top: 10px;
+      color: #555;
+    }
     .question {
       margin-top: 30px;
       font-size: 1.3rem;
@@ -73,6 +78,7 @@
   <div class="container">
     <h1>Molly 14</h1>
     <h2>🎉 Szülinapi Felfedező Játék</h2>
+    <p class="instructions">Válaszolj a kérdésekre a leginkább rád jellemző válaszok alapján, és a végén kiderül, melyik szuper utazás vár rád! 🌍✨</p>
     <div id="quiz">
       <div class="question" id="question"></div>
       <div class="answers" id="answers"></div>
@@ -151,13 +157,13 @@
       let imageUrl = "";
       if (score.A > score.B) {
         destination = "🏞️ Irány a Dolomitok és a Garda-tó! Készülj bakancsokkal és kalandvággyal!";
-        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Lake_Garda_from_Mount_Baldo.jpg/1024px-Lake_Garda_from_Mount_Baldo.jpg";
+        imageUrl = "https://www.visitdolomitibellunesi.com/imports/foto-pois/lunga-via-delle-dolomiti-d348d61a-214c-4191-954a-ee424e15ec79/17716/image-thumb__17716__detailHeader/images-trn-1-04a07cf4-ab62-4e44-9ee0-9283459406c7-99-image.webp";
       } else if (score.B > score.A) {
         destination = "🏛️ Milánó és a Comói-tó vár rád! Stílus, történelem és tavak minden mennyiségben!";
-        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Como_Lake_Italy_Summer.jpg/1024px-Como_Lake_Italy_Summer.jpg";
+        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/7/7a/20170706_MilanoDuomo_9637_%2836747362195%29.jpg";
       } else {
         destination = "🤔 Döntetlen! De szerintünk elég kíváncsi vagy, hogy imádd Milánót és a Comói-tavat!";
-        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Como_Lake_Italy_Summer.jpg/1024px-Como_Lake_Italy_Summer.jpg";
+        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/2/2a/Comoparco.JPG";
       }
       resultEl.textContent = destination;
       imageEl.src = imageUrl;
