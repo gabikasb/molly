@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Szülinapi Felfedező Játék</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: url('received_1414788541894125-COLLAGE.jpg') no-repeat center center;
+      backdrop-filter: opacity(66%);
+      background-size: 30%;
+      background-repeat: repeat;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      padding: 20px;
+      max-width: 600px;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #e96b56;
+    }
+    .question {
+      margin-top: 30px;
+      font-size: 1.3rem;
+    }
+    .answers {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #ffddc1;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ffc4a3;
+    }
+    .result {
+      font-size: 1.5rem;
+      margin-top: 40px;
+      display: none;
+    }
+    .destination-image {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Molly 14</h1>
+    <h2>🎉 Szülinapi Felfedező Játék</h2>
+    <div id="quiz">
+      <div class="question" id="question"></div>
+      <div class="answers" id="answers"></div>
+    </div>
+    <div class="result" id="result"></div>
+    <img id="destinationImg" class="destination-image" src="" alt="" style="display:none;">
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Milyen számodra egy tökéletes szombat?",
+        options: ["Túrázás vagy biciklizés a természetben 🌿", "Kávézók és könyvesboltok felfedezése ☕", "Rajzolás, játék vagy kézműveskedés otthon 🎨"],
+        scores: ["A", "B", "C"]
+      },
+      {
+        question: "Mit csomagolnál inkább?",
+        options: ["Túracipőt és hátizsákot 🥾", "Menő ruhákat és napszemüveget 🕶️", "Rajzfüzetet és valami finomat 🍫"],
+        scores: ["A", "B", "C"]
+      },
+      {
+        question: "Melyik állathoz hasonlítasz leginkább?",
+        options: ["Hegyi kecske 🐐", "Városi cica 🐈", "Bagoly 🦉"],
+        scores: ["A", "B", "C"]
+      },
+      {
+        question: "Mit jelent az olasz 'Lago' szó?",
+        options: ["Hegy 🏔️", "Tó 🌊", "Erdő 🌲"],
+        scores: ["C", "A", "B"]
+      },
+      {
+        question: "Melyik hangzik ínycsiklandóbbnak?",
+        options: ["Sajt, polenta és rétes 🧀🍎", "Milánói rizottó és stílusos desszertek 🍰", "Pizza örökké! 🍕"],
+        scores: ["A", "B", "C"]
+      },
+      {
+        question: "Mit csinálnál legszívesebben?",
+        options: ["Biciklizés a hegyek között 🚴‍♀️", "Utcai művészet felfedezése a föld alatt 🚇", "Pihenés a tóparton fagyival 🍨"],
+        scores: ["A", "B", "C"]
+      }
+    ];
+
+    let current = 0;
+    let score = { A: 0, B: 0, C: 0 };
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const resultEl = document.getElementById("result");
+    const imageEl = document.getElementById("destinationImg");
+
+    function showQuestion() {
+      const q = questions[current];
+      questionEl.textContent = q.question;
+      answersEl.innerHTML = "";
+      q.options.forEach((option, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => {
+          score[q.scores[i]]++;
+          current++;
+          if (current < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        };
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function showResult() {
+      document.getElementById("quiz").style.display = "none";
+      resultEl.style.display = "block";
+      imageEl.style.display = "block";
+      let destination = "";
+      let imageUrl = "";
+      if (score.A > score.B) {
+        destination = "🏞️ Irány a Dolomitok és a Garda-tó! Készülj bakancsokkal és kalandvággyal!";
+        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Lake_Garda_from_Mount_Baldo.jpg/1024px-Lake_Garda_from_Mount_Baldo.jpg";
+      } else if (score.B > score.A) {
+        destination = "🏛️ Milánó és a Comói-tó vár rád! Stílus, történelem és tavak minden mennyiségben!";
+        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Como_Lake_Italy_Summer.jpg/1024px-Como_Lake_Italy_Summer.jpg";
+      } else {
+        destination = "🤔 Döntetlen! De szerintünk elég kíváncsi vagy, hogy imádd Milánót és a Comói-tavat!";
+        imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Como_Lake_Italy_Summer.jpg/1024px-Como_Lake_Italy_Summer.jpg";
+      }
+      resultEl.textContent = destination;
+      imageEl.src = imageUrl;
+      imageEl.alt = destination;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
